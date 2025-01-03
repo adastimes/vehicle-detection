@@ -1,0 +1,38 @@
+task: detection
+
+num_classes: 5
+remap_mscoco_category: True
+
+train_dataloader: 
+  type: DataLoader
+  dataset: 
+    type: CocoDetection
+    #img_folder: /Users/robertkrutsch/Documents/Code/VD/data/coco2017/train2017/
+    #ann_file: /Users/robertkrutsch/Documents/Code/VD/data/coco2017/annotations/instances_train2017_small.json
+    img_folder: /Users/robertkrutsch/Documents/Code/VD/data/kiti/training/
+    ann_file: /Users/robertkrutsch/Documents/Code/VD/data/kiti/annotations/instances_train.json
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  batch_size: 1
+  num_workers: 1
+  drop_last: True 
+
+
+val_dataloader:
+  type: DataLoader
+  dataset: 
+    type: CocoDetection
+    #img_folder: /Users/robertkrutsch/Documents/Code/VD/data/coco2017/val2017/
+    #ann_file: /Users/robertkrutsch/Documents/Code/VD/data/coco2017/annotations/instances_val2017_small.json
+    img_folder: /Users/robertkrutsch/Documents/Code/VD/data/kiti/training/
+    ann_file: /Users/robertkrutsch/Documents/Code/VD/data/kiti/annotations/instances_val.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 1
+  num_workers: 1
+  drop_last: False
