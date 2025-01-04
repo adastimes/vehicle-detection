@@ -74,7 +74,10 @@ def prep_annotation_json(images_list, json_file_list):
             #if idx==10:
             #    break
             img_path = os.path.join(TRAIN_ROOT, img_name)
-            height, width = cv2.imread(img_path).shape[:2]       
+            height, width = cv2.imread(img_path).shape[:2]   
+            #if height!=375: continue 
+            # there are different size images apparently in the dataset, with this commented make sure the data loader config
+            # rescales the images to what is needed or else rtdeter will fail
             img_name_wo_suffix, file_extension = os.path.splitext(img_name)
             img_id = int(img_name_wo_suffix) 
             label_file_path = os.path.join(LABEL_PATH, '{}.txt'.format(img_name_wo_suffix))
@@ -159,6 +162,7 @@ val_list_list = img_list[split:]
 prep_annotation_json(train_file_list, os.path.join(ANNO_PATH, 'instances_train.json'))
 prep_annotation_json(val_list_list, os.path.join(ANNO_PATH,'instances_val.json'))
 
+#{370: 770, 1224: 770, 375: 6057, 1242: 6057, 374: 358, 1238: 358, 376: 296, 1241: 296}
 print('Done')
 
 '''
